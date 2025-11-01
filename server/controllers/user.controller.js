@@ -28,13 +28,13 @@ const userByID = async (req, res, next, id) => {
   try {
     let user = await User.findById(id);
     if (!user)
-      return res.status("400").json({
+      return res.status(400).json({
         error: "User not found",
       });
     req.profile = user;
     next();
   } catch (err) {
-    return res.status("400").json({
+    return res.status(400).json({
       error: "Could not retrieve user",
     });
   }
@@ -72,4 +72,14 @@ const remove = async (req, res) => {
     });
   }
 };
-export default { create, userByID, read, list, remove, update };
+const removeAll = async (req, res) => {
+  try {
+    await User.deleteMany();
+    return res.status(200).json({ message: "All users removed" });
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
+export default { create, userByID, read, list, remove, update, removeAll };

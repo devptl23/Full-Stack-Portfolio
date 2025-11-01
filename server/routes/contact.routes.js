@@ -10,12 +10,12 @@ import {
 
 const router = express.Router();
 
-router.route('/api/contacts')
+router.route('/')
   .get(getContacts)
   .post(createContact)
   .delete(deleteAllContacts);
 
-router.route('/api/contacts/:id')
+router.route('/:id')
   .get(getContactById)
   .put(updateContact)
   .delete(deleteContact);

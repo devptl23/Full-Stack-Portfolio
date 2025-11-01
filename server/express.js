@@ -4,14 +4,10 @@ import cookieParser from "cookie-parser";
 import compress from "compression";
 import cors from "cors";
 import helmet from "helmet";
-import userRoutes from "./routes/user.routes.js";
-import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", userRoutes);
-app.use("/api", authRoutes);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

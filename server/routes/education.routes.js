@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 import {
   createEducation,
   getEducations,
@@ -6,16 +6,18 @@ import {
   updateEducation,
   deleteEducation,
   deleteAllEducations
-} from '../controllers/education.controller.js';
+} from "../controllers/education.controller.js";
 
 const router = express.Router();
 
-router.route('/api/qualifications')
+router
+  .route("/")
   .get(getEducations)
   .post(createEducation)
   .delete(deleteAllEducations);
 
-router.route('/api/qualifications/:id')
+router
+  .route("/:id")
   .get(getEducationById)
   .put(updateEducation)
   .delete(deleteEducation);
