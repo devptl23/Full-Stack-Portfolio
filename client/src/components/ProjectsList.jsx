@@ -11,16 +11,23 @@ export default function ProjectsList() {
     // Check if user is admin (hardcoded admin email)
     const isAdmin = jwt && jwt.user && jwt.user.email === 'admin@portfolio.com';
 
+    console.log('ProjectsList - jwt:', jwt);
+    console.log('ProjectsList - isAdmin:', isAdmin);
+
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
         list(signal).then((data) => {
+            console.log('ProjectsList - fetched data:', data);
             if (data && data.error) {
                 console.log(data.error);
             } else {
-                setProjects(data);
+                setProjects(data || []);
             }
+        }).catch((err) => {
+            console.error('Error fetching projects:', err);
+            setProjects([]);
         });
 
         return function cleanup() {
@@ -43,9 +50,9 @@ export default function ProjectsList() {
     };
 
     return (
-        <div style={{ maxWidth: '900px', margin: '50px auto', padding: '20px' }}>
+        <div style={{ maxWidth: '900px', margin: '50px auto', padding: '20px', backgroundColor: 'white', minHeight: '500px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-                <h2>Projects List</h2>
+                <h2 style={{ color: '#333' }}>Projects List</h2>
                 {isAdmin && (
                     <Link
                         to="/project/new"
@@ -63,8 +70,8 @@ export default function ProjectsList() {
                 )}
             </div>
 
-            {projects.length === 0 ? (
-                <p style={{ textAlign: 'center', color: '#666' }}>No projects found.</p>
+            {!projects || projects.length === 0 ? (
+                <p style={{ textAlign: 'center', color: '#666', fontSize: '18px' }}>No projects found. Click "Add New Project" to create one!</p>
             ) : (
                 <div style={{ display: 'grid', gap: '20px' }}>
                     {projects.map((project) => (
