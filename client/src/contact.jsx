@@ -7,7 +7,8 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
-    email: ""
+    email: "",
+    description: ""
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -26,7 +27,8 @@ export default function Contact() {
     const contact = {
       firstname: formData.firstname || undefined,
       lastname: formData.lastname || undefined,
-      email: formData.email || undefined
+      email: formData.email || undefined,
+      description: formData.description || undefined
     };
 
     // Create contact without auth (public form) or with auth if logged in
@@ -37,10 +39,7 @@ export default function Contact() {
         setError(data.error);
       } else {
         setSuccess(true);
-        setFormData({ firstname: "", lastname: "", email: "" });
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
+        setFormData({ firstname: "", lastname: "", email: "", description: "" });
       }
     });
   }
@@ -100,6 +99,22 @@ export default function Contact() {
           value={formData.email}
           onChange={handleChange}
           required
+        />
+        <textarea
+          name="description"
+          placeholder="Your Message"
+          value={formData.description}
+          onChange={handleChange}
+          required
+          rows="5"
+          style={{
+            width: '100%',
+            padding: '10px',
+            fontSize: '16px',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            resize: 'vertical'
+          }}
         />
         <button type="submit">Send Message</button>
       </form>
