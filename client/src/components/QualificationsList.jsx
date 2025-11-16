@@ -11,16 +11,23 @@ export default function QualificationsList() {
     // Check if user is admin (hardcoded admin email)
     const isAdmin = jwt && jwt.user && jwt.user.email === 'admin@portfolio.com';
 
+    console.log('QualificationsList - jwt:', jwt);
+    console.log('QualificationsList - isAdmin:', isAdmin);
+
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
         list(signal).then((data) => {
+            console.log('QualificationsList - fetched data:', data);
             if (data && data.error) {
                 console.log(data.error);
             } else {
-                setQualifications(data);
+                setQualifications(data || []);
             }
+        }).catch((err) => {
+            console.error('Error fetching qualifications:', err);
+            setQualifications([]);
         });
 
         return function cleanup() {
@@ -43,9 +50,9 @@ export default function QualificationsList() {
     };
 
     return (
-        <div style={{ maxWidth: '900px', margin: '50px auto', padding: '20px' }}>
+        <div style={{ maxWidth: '900px', margin: '50px auto', padding: '20px', backgroundColor: 'white', minHeight: '500px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-                <h2>Qualifications/Education List</h2>
+                <h2 style={{ color: '#333' }}>Qualifications/Education List</h2>
                 {isAdmin && (
                     <Link
                         to="/qualification/new"
@@ -63,8 +70,8 @@ export default function QualificationsList() {
                 )}
             </div>
 
-            {qualifications.length === 0 ? (
-                <p style={{ textAlign: 'center', color: '#666' }}>No qualifications found.</p>
+            {!qualifications || qualifications.length === 0 ? (
+                <p style={{ textAlign: 'center', color: '#666', fontSize: '18px' }}>No qualifications found. Click "Add New Qualification" to create one!</p>
             ) : (
                 <div style={{ display: 'grid', gap: '20px' }}>
                     {qualifications.map((qualification) => (
