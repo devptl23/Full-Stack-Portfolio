@@ -1,20 +1,14 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Navigation from "./Navigation";
 
 export default function Layout() {
   return (
     <>
-      <h1>My Portfolio</h1>
-      <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/about">About Me</Link> |{" "}
-        <Link to="/projects">Projects</Link> |{" "}
-        <Link to="/services">Services</Link> |{" "}
-        <Link to="/contact">Contact</Link>
-      </nav>
-      <br />
-      <hr />
-      <Outlet />
+      <Navigation />
+      <div style={{ minHeight: 'calc(100vh - 60px)' }}>
+        <Outlet />
+      </div>
     </>
   );
 }
