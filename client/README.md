@@ -1,11 +1,53 @@
-# React + Vite
+# Frontend - React Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend React application for the COMP229 Assignment 3 Portfolio project.
 
-Currently, two official plugins are available:
+## Tech Stack
+- React 18.3
+- React Router 6.28
+- Vite 7.1.7
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Development
+
+### Start Development Server
+```bash
+npm run dev
+```
+Server runs on: http://localhost:5174
+
+### Build for Production
+```bash
+npm run build
+```
+
+### Preview Production Build
+```bash
+npm run preview
+```
+
+## Key Components
+
+- **Home.jsx** - Landing page
+- **SignIn.jsx / SignUp.jsx** - Authentication pages
+- **ProjectsList.jsx** - Display all projects with CRUD for admin
+- **QualificationsList.jsx** - Display qualifications with CRUD for admin
+- **ContactsList.jsx** - Admin view of contact submissions
+- **Navigation.jsx** - Main navigation with role-based menu items
+
+## API Integration
+
+All API calls are in the `src/api/` folder:
+- `api-auth.js` - Authentication endpoints
+- `api-user.js` - User management
+- `api-project.js` - Projects CRUD
+- `api-qualification.js` - Qualifications CRUD
+- `api-contact.js` - Contact form submission
+
+## Authentication
+
+JWT tokens are stored in `sessionStorage` via `auth-helper.js`
+
+Protected routes use `PrivateRoute.jsx` component to check authentication before rendering.
 
 ## React Compiler
 
