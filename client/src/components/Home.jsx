@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.jpg"; 
+import logo from "../assets/logo.jpg";
 
 const Home = () => {
   return (
@@ -24,7 +24,7 @@ const Home = () => {
         <button
           style={{
             padding: "0.75em 1.5em",
-            backgroundColor: "#646cff",
+            backgroundColor: "#e74c3c",
             color: "#fff",
             border: "none",
             borderRadius: "8px",
@@ -33,11 +33,11 @@ const Home = () => {
             transition: "background-color 0.3s ease, box-shadow 0.3s ease",
           }}
           onMouseOver={(e) => {
-            e.target.style.backgroundColor = "#535bf2";
-            e.target.style.boxShadow = "0 0 10px #535bf288";
+            e.target.style.backgroundColor = "#c0392b";
+            e.target.style.boxShadow = "0 0 10px #e74c3c88";
           }}
           onMouseOut={(e) => {
-            e.target.style.backgroundColor = "#646cff";
+            e.target.style.backgroundColor = "#e74c3c";
             e.target.style.boxShadow = "none";
           }}
         >

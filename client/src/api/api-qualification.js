@@ -1,8 +1,11 @@
 // API calls for qualification/education CRUD operations
 
+// Use environment variable for API URL, fallback to Vite proxy in development
+const API_URL = import.meta.env.VITE_API_URL || '';
+
 const create = async (qualification, credentials) => {
     try {
-        let response = await fetch('/api/qualifications/', {
+        let response = await fetch(`${API_URL}/api/qualifications/`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -19,7 +22,7 @@ const create = async (qualification, credentials) => {
 
 const list = async (signal) => {
     try {
-        let response = await fetch('/api/qualifications/', {
+        let response = await fetch(`${API_URL}/api/qualifications/`, {
             method: 'GET',
             signal: signal,
         });
@@ -31,7 +34,7 @@ const list = async (signal) => {
 
 const read = async (params, signal) => {
     try {
-        let response = await fetch('/api/qualifications/' + params.qualificationId, {
+        let response = await fetch(`${API_URL}/api/qualifications/${params.qualificationId}`, {
             method: 'GET',
             signal: signal,
         });
@@ -43,7 +46,7 @@ const read = async (params, signal) => {
 
 const update = async (params, credentials, qualification) => {
     try {
-        let response = await fetch('/api/qualifications/' + params.qualificationId, {
+        let response = await fetch(`${API_URL}/api/qualifications/${params.qualificationId}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -60,7 +63,7 @@ const update = async (params, credentials, qualification) => {
 
 const remove = async (params, credentials) => {
     try {
-        let response = await fetch('/api/qualifications/' + params.qualificationId, {
+        let response = await fetch(`${API_URL}/api/qualifications/${params.qualificationId}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',

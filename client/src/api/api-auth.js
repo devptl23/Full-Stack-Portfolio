@@ -1,8 +1,11 @@
 // API calls for authentication operations
 
+// Use environment variable for API URL, fallback to Vite proxy in development
+const API_URL = import.meta.env.VITE_API_URL || '';
+
 const signin = async (user) => {
     try {
-        let response = await fetch('/api/auth/signin', {
+        let response = await fetch(`${API_URL}/api/auth/signin`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -19,7 +22,7 @@ const signin = async (user) => {
 
 const signout = async () => {
     try {
-        let response = await fetch('/api/auth/signout', {
+        let response = await fetch(`${API_URL}/api/auth/signout`, {
             method: 'GET',
         });
         return await response.json();

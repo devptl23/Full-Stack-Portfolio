@@ -1,0 +1,35 @@
+# Netlify Configuration for React Portfolio Frontend
+
+[build]
+  # Build command
+  command = "npm run build"
+  
+  # Directory to deploy (output directory)
+  publish = "dist"
+  
+  # Base directory for build (since we're in client folder)
+  base = "client"
+
+# Environment variables (set these in Netlify dashboard)
+# VITE_API_URL = your backend URL from Render
+
+# Redirect all requests to index.html for client-side routing (SPA)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer-when-downgrade"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
