@@ -1,0 +1,74 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  # Job 1: Run Tests
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies (client)
+        run: |
+          cd client
+          npm ci
+      
+      - name: Run unit tests
+        run: |
+          cd client
+          npm test -- --run
+      
+      - name: Build frontend
+        run: |
+          cd client
+          npm run build
+  
+  # Job 2: Deploy Backend (if using automated deployment)
+  deploy-backend:
+    name: Deploy Backend
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Trigger Render Deployment
+        run: |
+          echo "Backend deployment triggered on Render automatically"
+          echo "Render monitors the main branch and deploys on push"
+  
+  # Job 3: Deploy Frontend (if using automated deployment)
+  deploy-frontend:
+    name: Deploy Frontend  
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Trigger Vercel Deployment
+        run: |
+          echo "Frontend deployment triggered on Vercel automatically"
+          echo "Vercel monitors the main branch and deploys on push"
