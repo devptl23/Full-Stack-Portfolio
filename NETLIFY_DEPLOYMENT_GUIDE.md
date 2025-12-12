@@ -46,13 +46,14 @@ Before you start, make sure you have:
 Click "Advanced" → Add Environment Variables:
 
 ```
-MONGODB_URI = mongodb+srv://username:password@cluster.mongodb.net/portfolio?retryWrites=true&w=majority
-JWT_SECRET = your_secret_key_here_make_it_strong
+MONGODB_URI = mongodb+srv://2000devp1_db_user:2U5hPcLoTLvzG5x9@portfoliobackend.oouazub.mongodb.net/Portfolio?retryWrites=true&w=majority&appName=PortfolioBackend
+JWT_SECRET = MyPortfolio2024SecretKey!@#$
 NODE_ENV = production
 PORT = 3000
 ```
 
 ### Step 4: Deploy
+
 
 1. Click "Create Web Service"
 2. Wait 3-5 minutes for deployment
